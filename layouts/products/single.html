@@ -32,7 +32,8 @@
           {{ if .Params.sizes }}
           data-item-custom2-name="Choose Size"
           data-item-custom2-options="{{range $index, $element:= .Params.sizes}}{{if eq $index 0}}{{. | title}}{{else}}|{{. | title}}{{end}}{{end}}"
-          {{end}}>{{i18n "add_to_cart"}}
+          {{end}}
+          data-item-custom3-name="Notes">{{i18n "add_to_cart"}}
         </button>
         <div class="content">{{.Content}}</div>
       </div>
