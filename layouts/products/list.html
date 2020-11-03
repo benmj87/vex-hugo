@@ -16,19 +16,25 @@
       {{ range (where .Site.RegularPages "Section" "products") }}
       <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
         <div class="block">
+          {{if not .Params.draft}}  
           <div class="gallery-overlay">
             <a href="{{ .Permalink }}" class="gallery-popup">
               <i class="tf-ion-android-open"></i>
             </a>
           </div>
+          {{end}}
           <img class="img-fluid" src="{{range first 1 .Params.images}}{{.|absURL}}{{end}}" alt="{{.Title}}">
         </div>
         <div class="product-info">
-        <h4 class="mb-2">{{.Title}}</h4>
-        <p class="price">{{if .Params.discount_price}}{{site.Params.currency}}{{.Params.discount_price}}{{else}}{{site.Params.currency}}{{.Params.price}}{{end}}
-          {{if .Params.discount_price}}<s class="price">{{site.Params.currency}}{{ .Params.price }}</s>{{end}}
+          <h4 class="mb-2">{{.Title}}</h4>
+          
+          <p class="price">
+            {{if not .Params.draft}}
+              {{if .Params.discount_price}}{{site.Params.currency}}{{.Params.discount_price}}{{else}}{{site.Params.currency}}{{.Params.price}}{{end}}
+              {{if .Params.discount_price}}<s class="price">{{site.Params.currency}}{{ .Params.price }}</s>{{end}}       
+            {{end}}
           </p>
-        </div>
+        </div> 
       </div>
       {{ end }}
     </div>
