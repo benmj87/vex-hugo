@@ -1,4 +1,11 @@
 <!-- navigation -->
+
+{{ if site.Params.showNotificationBanner }}
+<div id="notification-banner" class="notification-banner">
+  {{ site.Params.notificationBanner }}
+</div>
+{{ end }}
+
 <header class="sticky-top bg-white">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">

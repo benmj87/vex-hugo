@@ -30,3 +30,17 @@
 <!-- Main Script -->
 {{ $script := resources.Get "js/script.js" }}
 <script src="{{ $script.Permalink }}"></script>
+
+<script>
+  window.onload = function() {
+    Snipcart.events.on('theme.routechanged', (routesChange) => {
+      if (routesChange.from === "/" && routesChange.to !== "/") {
+        document.getElementById('notification-banner').style.display = "none";
+      }
+
+      if (routesChange.from !== "/" && routesChange.to === "/") {
+        document.getElementById('notification-banner').style.display = "block";
+      }
+    });
+  }
+</script>
