@@ -26,16 +26,15 @@
           data-item-name="{{.Title}}"
           data-item-image="{{range first 1 .Params.Images}}{{. | absURL}}{{end}}"
           data-item-price="{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}" data-item-url="{{.Permalink}}" 
-          {{ if .Params.colors }}
-          data-item-custom1-name="Choose Color"
-          data-item-custom1-options="{{range $index, $element:= .Params.colors}}{{ if eq $index 0 }}{{. | title}}{{ else }}|{{. | title }}{{end}}{{end}}"
-          {{ end }}
-          {{ if .Params.sizes }}
-          data-item-custom2-name="Choose Size"
-          data-item-custom2-options="{{range $index, $element:= .Params.sizes}}{{if eq $index 0}}{{. | title}}{{else}}|{{. | title}}{{end}}{{end}}"
-          {{end}}
-          data-item-custom3-name="Notes"
-          data-item-custom3-type="textarea">{{i18n "add_to_cart"}}
+          data-item-custom1-name="Notes"
+          data-item-custom1-type="textarea"
+          {{ if .Params.options }}
+            {{range $index, $element := .Params.options }}
+              {{ $customIndex := add $index 2 }}
+              data-item-custom{{$customIndex}}-name="{{ $element.name }}"
+              data-item-custom{{$customIndex}}-options="{{ $element.choices }}"
+            {{ end }}      
+          {{ end }}>{{i18n "add_to_cart"}}
         </button>
         <div class="content">{{.Content}}</div>
       </div>
