@@ -128,7 +128,7 @@ a:active {
 }
 
 .section {
-  padding: 100px 0;
+  padding: 50px 0;
 }
 
 .font-size-60 {
@@ -155,6 +155,47 @@ a:active {
 /*--
     custom heading
 --*/
+
+.carousel-item {
+  height: 600px;
+  align-content: center;
+  position: relative;
+}
+
+.carousel-item .content {
+  padding: 30px 20px;
+  align-self: center;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.77);
+  text-align: center;
+}
+
+.carousel-item img {
+  max-height: 600px;
+  width: 100%;
+  opacity: 0.9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.carousel-item p {
+  font-size: 20px;
+}
+
+.carousel-item a.btn {
+  font-size: 22px;
+  border: solid 2px #eee;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.carousel-item a.btn:hover {
+  background-color: #fff;
+  border: solid 2px #eee;
+}
+
 .text-center {
   text-align: center;
 }
@@ -302,7 +343,7 @@ a:active {
   Gallery start
 --*/
 .gallery {
-  padding-bottom: 100px;
+  padding-bottom: 50px;
 
   .owl-item {
     overflow: hidden;
