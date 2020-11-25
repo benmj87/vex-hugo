@@ -29,7 +29,7 @@
           data-item-custom1-name="Notes"
           data-item-custom1-type="textarea"
           {{ if .Params.options }}
-            {{range $index, $element := .Params.options }}
+            {{ range $index, $element := .Params.options }}
               {{ $customIndex := add $index 2 }}
               data-item-custom{{$customIndex}}-name="{{ $element.name }}"
               data-item-custom{{$customIndex}}-options="{{ $element.choices }}"
