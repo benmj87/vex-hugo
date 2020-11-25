@@ -6,6 +6,7 @@ sans-serif;
 $secondary-font: 'Droid Serif',
 serif;
 $primary-color: #c7aa8c;
+$secondary-color: #c7aa8c;
 $icon-font: 'themefisher-font' !important;
 
 /*--
@@ -184,14 +185,14 @@ a:active {
 
 .carousel-item a.btn {
   font-size: 22px;
-  border: solid 2px #eee;
+  border: solid 2px #fff;
   padding: 10px;
   border-radius: 2px;
 }
 
 .carousel-item a.btn:hover {
   background-color: #fff;
-  border: solid 2px #eee;
+  border: solid 2px #fff;
 }
 
 .text-center {
