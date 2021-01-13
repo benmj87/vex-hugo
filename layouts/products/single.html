@@ -25,38 +25,89 @@
           <button id="openModal" class="btn btn-main mb-5">{{i18n "add_to_cart"}}
           </button>
 
-          <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <p>Some text in the Modal..</p>
-
-              <div>
-                <input type="radio" id="none" name="card" value="None">
-                <label for="none">No thanks</label>
-                <input type="radio" id="happyBirthday" name="card" value="Happy Birthday">
-                <label for="happyBirthday">Happy Birthday</label>
+          <div id="modalSelector" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add a greeting card?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body card-options">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="card">
+                          <img class="card-img-top" src="/images/congratulations-card.jpg" alt="Congratulations">
+                          <div class="card-body">
+                            <p class="card-text"><input type="radio" name="card-choice" value="Congratulations"><span><b>Congratulations +£2.50</b></span></p>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="card">
+                          <img class="card-img-top" src="/images/happy-birthday-card.jpg" alt="Happy birthday">
+                          <div class="card-body">
+                            <p class="card-text"><input type="radio" name="card-choice" value="Happy birthday"><span><b>Happy birthday +£2.50</b></span></p>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="card">
+                          <img class="card-img-top" src="/images/thank-you-card.jpg" alt="Thank you">
+                          <div class="card-body">
+                            <p class="card-text"><input type="radio" name="card-choice" value="Thank you"><span><b>Thank you +£2.50</b></span></p>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="card">
+                          <img class="card-img-top" src="/images/thinking-of-you-card.jpg" alt="Thinking of you">
+                          <div class="card-body">
+                            <p class="card-text"><input type="radio" name="card-choice" value="Thinking of you"><span><b>Thinking of you +£2.50</b></span></p>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="card">
+                          <div class="card-body">
+                            <p class="card-text"><input type="radio" name="card-choice" checked="checked" value="None"><span><b>No thanks</b></span></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="snipcart-add-item btn btn-main" 
+                    id="snipcartButton"
+                    data-item-id="{{.Title | urlize}}__{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}"
+                    data-item-name="{{.Title}}"
+                    data-item-image="{{range first 1 .Params.Images}}{{. | absURL}}{{end}}"
+                    data-item-price="{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}" data-item-url="{{.Permalink}}" 
+                    data-item-custom1-name="Notes"
+                    data-item-custom1-type="textarea"
+                    data-item-custom2-name="Card"
+                    data-item-custom2-value="None"
+                    data-item-custom2-options="None|Congratulations[+2.50]|Happy birthday[+2.50]|Thank you[+2.50]|Thinking of you[+2.50]"
+                    {{ if .Params.options }}
+                      {{ range $index, $element := .Params.options }}
+                        {{ $customIndex := add $index 3 }}
+                        data-item-custom{{$customIndex}}-name="{{ $element.name }}"
+                        data-item-custom{{$customIndex}}-options="{{ $element.choices }}"
+                      {{ end }}      
+                    {{ end }}>{{i18n "add_to_cart"}}
+                  </button>
+                </div>
               </div>
-
-              <button class="snipcart-add-item btn btn-main mb-5" 
-                id="snipcartButton"
-                data-item-id="{{.Title | urlize}}__{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}"
-                data-item-name="{{.Title}}"
-                data-item-image="{{range first 1 .Params.Images}}{{. | absURL}}{{end}}"
-                data-item-price="{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}" data-item-url="{{.Permalink}}" 
-                data-item-custom1-name="Notes"
-                data-item-custom1-type="textarea"
-                data-item-custom2-name="Card"
-                data-item-custom2-options="None|Happy Birthday[+2.50]"
-                {{ if .Params.options }}
-                  {{ range $index, $element := .Params.options }}
-                    {{ $customIndex := add $index 3 }}
-                    data-item-custom{{$customIndex}}-name="{{ $element.name }}"
-                    data-item-custom{{$customIndex}}-options="{{ $element.choices }}"
-                  {{ end }}      
-                {{ end }}>{{i18n "add_to_cart"}}
-              </button>
-            </div>          
+            </div>
           </div>
         {{else}}
           <button class="snipcart-add-item btn btn-main mb-5" 
