@@ -15,14 +15,15 @@ $(window).on('load', function () {
 
     $(".card").on("click", function(e) {
       var note = $(e.currentTarget).find(".note");
-      if (note.is(":hidden")) {
-        // check its not already displayed
+      var val = $(e.currentTarget).find("input[type=radio]").prop("value");
+      if (note.is(":hidden") || val === "None") {
+        // check its not already displayed or if none we want to slide down any that are
         $(".note").slideUp();
         note.slideDown();
       }
 
       $(e.currentTarget).find("input[type=radio]").prop("checked", true);
-      snipcartButton.setAttribute("data-item-custom2-value", $(e.currentTarget).find("input[type=radio]").prop("value"));
+      snipcartButton.setAttribute("data-item-custom2-value", val);
     });
 
     // Get the button that opens the modal
