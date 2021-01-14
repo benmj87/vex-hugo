@@ -109,9 +109,11 @@
                     data-item-custom2-name="Card"
                     data-item-custom2-value="None"
                     data-item-custom2-options="None|Congratulations[+2.00]|Happy birthday[+2.00]|Thank you[+2.00]|Thinking of you[+2.00]"
+                    data-item-custom3-name="Card Text"
+                    data-item-custom3-type="textarea"
                     {{ if .Params.options }}
                       {{ range $index, $element := .Params.options }}
-                        {{ $customIndex := add $index 3 }}
+                        {{ $customIndex := add $index 4 }}
                         data-item-custom{{$customIndex}}-name="{{ $element.name }}"
                         data-item-custom{{$customIndex}}-options="{{ $element.choices }}"
                       {{ end }}      

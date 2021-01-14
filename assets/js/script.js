@@ -10,7 +10,7 @@ $(window).on('load', function () {
     var snipcartButton = document.querySelector("#snipcartButton");
 
     $(".note").on('keyup', function(e) {
-      snipcartButton.setAttribute("data-item-custom1-value", e.target.value);
+      snipcartButton.setAttribute("data-item-custom3-value", e.target.value);
     });
 
     $(".card").on("click", function(e) {
