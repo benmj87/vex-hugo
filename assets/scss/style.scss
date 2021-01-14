@@ -697,5 +697,18 @@ textarea.form-control {
       margin-left: 1rem;
       font-weight: 900;
     }
+
+    &.note {
+      display: none;
+    }
+
+    textarea {
+      font-size: medium;
+      width: 100%;
+    }
+
+    label {
+      font-size: medium;
+    }
   }
 }

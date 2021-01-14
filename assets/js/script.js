@@ -9,7 +9,18 @@ $(window).on('load', function () {
   if (document.querySelector("#openModal")) {
     var snipcartButton = document.querySelector("#snipcartButton");
 
+    $(".note").on('keyup', function(e) {
+      snipcartButton.setAttribute("data-item-custom1-value", e.target.value);
+    });
+
     $(".card").on("click", function(e) {
+      var note = $(e.currentTarget).find(".note");
+      if (note.is(":hidden")) {
+        // check its not already displayed
+        $(".note").slideUp();
+        note.slideDown();
+      }
+
       $(e.currentTarget).find("input[type=radio]").prop("checked", true);
       snipcartButton.setAttribute("data-item-custom2-value", $(e.currentTarget).find("input[type=radio]").prop("value"));
     });
