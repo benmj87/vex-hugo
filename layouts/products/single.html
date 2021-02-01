@@ -111,6 +111,8 @@
                     data-item-custom2-options="None|Congratulations[+2.00]|Happy birthday[+2.00]|Thank you[+2.00]|Thinking of you[+2.00]"
                     data-item-custom3-name="Card Text"
                     data-item-custom3-type="textarea"
+                    data-item-stackable="never"
+                    data-item-weight="1000"
                     {{ if .Params.options }}
                       {{ range $index, $element := .Params.options }}
                         {{ $customIndex := add $index 4 }}
@@ -131,6 +133,8 @@
             data-item-price="{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}" data-item-url="{{.Permalink}}" 
             data-item-custom1-name="Notes"
             data-item-custom1-type="textarea"
+            data-item-stackable="never"
+            data-item-weight="1000"
             {{ if .Params.options }}
               {{ range $index, $element := .Params.options }}
                 {{ $customIndex := add $index 2 }}
