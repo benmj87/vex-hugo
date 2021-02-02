@@ -38,6 +38,9 @@ $(window).on('load', function () {
       $("#modalSelector").modal({});
     }  
   }
+
+  // create your own boxes
+  // $("")
   
   // product Slider
   $('.product-image-slider').slick({
