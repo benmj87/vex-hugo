@@ -40,7 +40,40 @@ $(window).on('load', function () {
   }
 
   // create your own boxes
-  // $("")
+  if (document.querySelector("#createYourOwn")) {
+    var miniHandler = function() {
+      var mini = $(this);
+      if ($("#selectedProductsRow").children().length === 1) {
+        $("#selectedProducts").slideUp(function () {
+          mini.remove();
+        });
+      } else {
+        mini.remove();
+      }
+    }
+
+    $(".product").on('click', function() {
+      if ($("#selectedProductsRow").children().length < 5) {
+        var mini = $(this).find('.mini').clone();
+        mini.on('click', miniHandler);
+
+        mini.removeClass("d-none");
+        $("#selectedProductsRow").append(mini);
+        $("#selectedProducts").slideDown();
+      } else {
+        alert('Maximum of 5 products');
+      }
+    });
+
+    document.getElementById("openModal").onclick = function() {
+      // only allow adding with a minimum of 2 products
+      if ($("#selectedProductsRow").children().length >= 2) {
+        $("#modalSelector").modal({});
+      } else {
+        alert('Minimum of 2 products');
+      }
+    };
+  }
   
   // product Slider
   $('.product-image-slider').slick({

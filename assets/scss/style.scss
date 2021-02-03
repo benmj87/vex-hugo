@@ -724,3 +724,11 @@ textarea.form-control {
 .subtle-background {
   background-color:rgba(126, 126, 126, 0.2);
 }
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+#selectedProducts {
+  display: none;
+}

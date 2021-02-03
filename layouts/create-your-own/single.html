@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <section class="section gallery">
-  <div class="container">
+  <div id="createYourOwn" class="container">
     <div class="row">
       
       <div class="col-12 text-center mb-5">
@@ -13,55 +13,37 @@
           {{.Content}}
         </p>
       </div>
+            
+      {{- partial "upsell-modal.html" . -}}
 
-      <div class="row col-12 mb-5 box-shadow border-radius subtle-background">
-        <div class="row">
-          <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
-            <div class="block"> 
-              <div class="gallery-overlay">
-                <div class="gallery-popup">
-                  <i class="tf-ion-android-cancel"></i>
-                </div>
-              </div>
-              <img class="img-fluid border-radius" src="../../images/red onion savoury box.jpg" alt="some name">
-            </div>
-          </div>
-            
-          <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
-            <div class="block"> 
-              <div class="gallery-overlay">
-                <div class="gallery-popup">
-                  <i class="tf-ion-android-cancel"></i>
-                </div>
-              </div>
-              <img class="img-fluid border-radius" src="../../images/red onion savoury box.jpg" alt="some name">
-            </div>
-          </div>
-            
-          <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
-            <div class="block"> 
-              <div class="gallery-overlay">
-                <div class="gallery-popup">
-                  <i class="tf-ion-android-cancel"></i>
-                </div>
-              </div>
-              <img class="img-fluid border-radius" src="../../images/red onion savoury box.jpg" alt="some name">
-            </div>
-          </div>
+      <div id="selectedProducts" class="row col-12 mb-5 box-shadow border-radius subtle-background">
+        <div id="selectedProductsRow" class="row">
         </div>
+          
         <div class="row col-12">
           <div class="col-12 mb-4">
-            <button class="snipcart-add-item btn btn-main">Add to cart</button>
+            <button id="openModal" class="btn btn-main" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">{{i18n "add_to_cart"}}</button>
           </div>
         </div>
       </div>
 
-      {{ range .Params.options }}
+      {{ range .Params.products }}
       <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
         <div class="block">
-          <div class="gallery-overlay">
+          <div class="gallery-overlay pointer product">
             <div class="gallery-popup">
               <i class="tf-ion-android-add-circle"></i>
+            </div>
+            
+            <div data-option-name="{{.option_name}}" class="mini d-none col-lg-2 col-md-4 col-sm-6 mb-2">
+              <div class="block"> 
+                <div class="gallery-overlay pointer">
+                  <div class="gallery-popup">
+                    <i class="tf-ion-android-cancel"></i>
+                  </div>
+                </div>
+                <img class="img-fluid border-radius" src="{{ .image | absURL }}" alt="{{.name}}">
+              </div>
             </div>
           </div>
           <img class="img-fluid border-radius" src="{{ .image | absURL }}" alt="{{.name}}">
@@ -72,7 +54,7 @@
           <p class="price">
             {{ .price }}
           </p>
-        </div> 
+        </div>        
       </div>
       {{end}}
     </div>
