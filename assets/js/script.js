@@ -40,6 +40,38 @@ $(window).on('load', function () {
   }
 
   // create your own boxes
+  var resetSelection = function() {
+    var snipcartButton = document.getElementById("snipcartButton");
+    
+    // first three customs are Note, Card choice, Card Text.
+    var i = 4;
+    while (snipcartButton.hasAttribute("data-item-custom" + i + "-name")) {
+      if (i <= 5) {
+        // start at 4, first two don't have a "None" option (minimum of two per order) so just remove the attribute
+        snipcartButton.removeAttribute("data-item-custom" + i + "-value");
+      } else {
+        snipcartButton.setAttribute("data-item-custom" + i + "-value", "None");
+      }
+
+      i++;
+    }
+    
+    // first three options are Note, Card choice, Card Text.  
+    var i = 4;
+    $("#selectedProductsRow").children().each((_, em) => {
+      var options = snipcartButton.getAttribute("data-item-custom" + i + "-options");
+      var selectedOption = em.getAttribute("data-option-name");
+
+      if (options.indexOf(selectedOption) <= -1) {
+        alert("Invalid option chosen");
+      } else {
+        snipcartButton.setAttribute("data-item-custom" + i + "-value", em.getAttribute("data-option-name"));
+      }
+
+      i++;
+    });
+  }
+
   if (document.querySelector("#createYourOwn")) {
     var miniHandler = function() {
       var mini = $(this);
@@ -63,6 +95,8 @@ $(window).on('load', function () {
       } else {
         alert('Maximum of 5 products');
       }
+      
+      resetSelection();
     });
 
     document.getElementById("openModal").onclick = function() {
@@ -72,6 +106,8 @@ $(window).on('load', function () {
       } else {
         alert('Minimum of 2 products');
       }
+      
+      resetSelection();
     };
   }
   
