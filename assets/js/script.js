@@ -76,7 +76,7 @@ $(window).on('load', function () {
       i++;
     });
 
-    $("#total p").text("Total £" + (totalCost/100.0).toFixed(2).toString());
+    $("#total").text("£" + (totalCost/100.0).toFixed(2).toString());
   }
 
   if (document.querySelector("#createYourOwn")) {
