@@ -43,6 +43,7 @@ $(window).on('load', function () {
   var resetSelection = function() {
     var snipcartButton = document.getElementById("snipcartButton");
     
+    // set all the options to default
     // first three customs are Note, Card choice, Card Text.
     var i = 4;
     while (snipcartButton.hasAttribute("data-item-custom" + i + "-name")) {
@@ -56,11 +57,15 @@ $(window).on('load', function () {
       i++;
     }
     
+    // work through the choices in the #selectedProductsRow and set them in the snipcart button
     // first three options are Note, Card choice, Card Text.  
     var i = 4;
+    var totalCost = 0;
     $("#selectedProductsRow").children().each((_, em) => {
       var options = snipcartButton.getAttribute("data-item-custom" + i + "-options");
       var selectedOption = em.getAttribute("data-option-name");
+      var price = parseInt(em.getAttribute("data-option-price"));
+      totalCost += price;
 
       if (options.indexOf(selectedOption) <= -1) {
         alert("Invalid option chosen");
@@ -70,6 +75,8 @@ $(window).on('load', function () {
 
       i++;
     });
+
+    $("#total p").text("Total £" + (totalCost/100.0).toFixed(2).toString());
   }
 
   if (document.querySelector("#createYourOwn")) {

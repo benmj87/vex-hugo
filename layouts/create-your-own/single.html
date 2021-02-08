@@ -21,8 +21,11 @@
         </div>
           
         <div class="row col-12">
-          <div class="col-12 mb-4">
-            <button id="openModal" class="btn btn-main" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">{{i18n "add_to_cart"}}</button>
+          <div class="mb-4 col-lg-3 col-md-4 col-sm-6">
+            <button id="openModal" class="btn btn-main">{{i18n "add_to_cart"}}</button>
+          </div>
+          <div id="total" class="mb-4 col-lg-3 col-md-4 col-sm-6 price">
+            <p></p>
           </div>
         </div>
       </div>
@@ -35,7 +38,7 @@
               <i class="tf-ion-android-add-circle"></i>
             </div>
             
-            <div data-option-name="{{.option_name}}" class="mini d-none col-lg-2 col-md-4 col-sm-6 mb-2">
+            <div data-option-name="{{.option_name}}" data-option-price="{{.price}}" class="mini d-none col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
               <div class="block"> 
                 <div class="gallery-overlay pointer">
                   <div class="gallery-popup">
@@ -52,7 +55,7 @@
           <h4 class="mb-2">{{.name}}</h4>
           
           <p class="price">
-            {{ .price }}
+            &pound;{{ lang.NumFmt 2 (div .price 100.0) }}
           </p>
         </div>        
       </div>
