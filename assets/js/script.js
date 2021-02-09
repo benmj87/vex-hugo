@@ -76,10 +76,13 @@ $(window).on('load', function () {
       i++;
     });
 
-    $("#total").text("£" + (totalCost/100.0).toFixed(2).toString());
+    $("#total").text("£" + (totalCost/100.0).toFixed(2).toString());    
+    $("#liveToast").toast("show");
   }
 
-  if (document.querySelector("#createYourOwn")) {
+  if (document.querySelector("#createYourOwn")) {    
+    $("#liveToast").toast();
+
     var miniHandler = function() {
       var mini = $(this);
       if ($("#selectedProductsRow").children().length === 1) {

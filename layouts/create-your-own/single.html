@@ -3,7 +3,7 @@
 <section class="section gallery">
   <div id="createYourOwn" class="container">
     <div class="row">
-      
+
       <div class="col-12 text-center mb-5">
         <h1 class="font-weight-bold">{{.Title}}</h1>
       </div>
@@ -13,13 +13,18 @@
           {{.Content}}
         </p>
       </div>
-            
+
       {{- partial "upsell-modal.html" . -}}
 
       <div id="selectedProducts" class="row col-12 mb-5 box-shadow border-radius subtle-background">
+        <div class="row">
+          <div class="mobile-d-flex mobile-justify-content-center mb-4 col">
+            <h2 class="center mt-2">Your box</h2>
+          </div>
+        </div>
         <div id="selectedProductsRow" class="row">
         </div>
-          
+
         <div class="row">
           <div class="mobile-d-flex mobile-justify-content-center mb-4 col">
             <button id="openModal" class="btn btn-main">
@@ -37,9 +42,10 @@
             <div class="gallery-popup">
               <i class="tf-ion-android-add-circle"></i>
             </div>
-            
-            <div data-option-name="{{.option_name}}" data-option-price="{{.price}}" class="mini d-none col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
-              <div class="block"> 
+
+            <div data-option-name="{{.option_name}}" data-option-price="{{.price}}"
+              class="mini d-none col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
+              <div class="block">
                 <div class="gallery-overlay pointer">
                   <div class="gallery-popup">
                     <i class="tf-ion-android-cancel"></i>
@@ -53,14 +59,30 @@
         </div>
         <div class="product-info">
           <h4 class="mb-2">{{.name}}</h4>
-          
+
           <p class="price">
             &pound;{{ lang.NumFmt 2 (div .price 100.0) }}
           </p>
           <p class="reduced-size-text">{{ .description }}</p>
-        </div>        
+        </div>
       </div>
       {{end}}
+
+      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="7000">
+          <div class="toast-header">
+            <i class="tf-ion-android-cart"></i>
+            &nbsp;&nbsp;
+            <strong class="mr-auto">Added!</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            <a href="#createYourOwn">Review your box.</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
