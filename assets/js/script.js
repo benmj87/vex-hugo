@@ -60,7 +60,8 @@ $(window).on('load', function () {
     // work through the choices in the #selectedProductsRow and set them in the snipcart button
     // first three options are Note, Card choice, Card Text.  
     var i = 4;
-    var totalCost = 0;
+    var startingCost = parseInt(snipcartButton.getAttribute("data-item-price").replace(/\./, '')); // get the starting price from the snipcart button but remove the . so its in pence
+    var totalCost = startingCost;
     $("#selectedProductsRow").children().each((_, em) => {
       var options = snipcartButton.getAttribute("data-item-custom" + i + "-options");
       var selectedOption = em.getAttribute("data-option-name");
