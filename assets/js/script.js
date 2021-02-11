@@ -62,7 +62,7 @@ $(window).on('load', function () {
     var i = 4;
     var startingCost = parseInt(snipcartButton.getAttribute("data-item-price").replace(/\./, '')); // get the starting price from the snipcart button but remove the . so its in pence
     var totalCost = startingCost;
-    $("#selectedProductsRow").children().each((_, em) => {
+    $("#selectedProductsRow .mini").each((_, em) => {
       var options = snipcartButton.getAttribute("data-item-custom" + i + "-options");
       var selectedOption = em.getAttribute("data-option-name");
       var price = parseInt(em.getAttribute("data-option-price"));
@@ -86,7 +86,7 @@ $(window).on('load', function () {
 
     var miniHandler = function() {
       var mini = $(this);
-      if ($("#selectedProductsRow").children().length === 1) {
+      if ($("#selectedProductsRow .mini").length === 1) {
         $("#selectedProducts").slideUp(function () {
           mini.remove();
         });
@@ -96,7 +96,7 @@ $(window).on('load', function () {
     }
 
     $(".product").on('click', function() {
-      if ($("#selectedProductsRow").children().length < 5) {
+      if ($("#selectedProductsRow .mini").length < 5) {
         var mini = $(this).find('.mini').clone();
         mini.on('click', miniHandler);
 
@@ -112,7 +112,7 @@ $(window).on('load', function () {
 
     document.getElementById("openModal").onclick = function() {
       // only allow adding with a minimum of 2 products
-      if ($("#selectedProductsRow").children().length >= 2) {
+      if ($("#selectedProductsRow .mini").length >= 2) {
         $("#modalSelector").modal({});
       } else {
         alert('Minimum of 2 products');
