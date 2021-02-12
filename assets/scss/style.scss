@@ -746,3 +746,7 @@ textarea.form-control {
     justify-content: center;
   }
 }
+
+.card-text span {
+  word-break: break-all;
+}
