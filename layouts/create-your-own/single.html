@@ -24,8 +24,8 @@
         </div>
         <div id="selectedProductsRow" class="row">
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
-            <div class="block">
-              <img class="img-fluid border-radius" src="{{ .Params.packaging_image | absURL }}" alt="Packaging">
+            <div class="block" data-toggle="tooltip" data-placement="top" title="{{ .Params.packaging_image_alt }}">
+              <img class="img-fluid border-radius" src="{{ .Params.packaging_image | absURL }}" alt="{{ .Params.packaging_image_alt }}">
             </div>
           </div>
         </div>
