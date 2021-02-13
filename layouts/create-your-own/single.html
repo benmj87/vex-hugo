@@ -25,7 +25,7 @@
         <div id="selectedProductsRow" class="row">
           <div class="col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
             <div class="block">
-              <img class="img-fluid border-radius" src="{{ .Params.box_image | absURL }}" alt="foo">
+              <img class="img-fluid border-radius" src="{{ .Params.packaging_image | absURL }}" alt="Packaging">
             </div>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <div class="mobile-d-flex mobile-justify-content-center mb-4 col">
             <button id="openModal" class="btn btn-main">
               {{i18n "add_to_cart"}}
-              <span id="total" class="badge badge-primary">0.00</span>
+              <span id="total" class="total badge badge-primary">0.00</span>
             </button>
           </div>
         </div>
@@ -74,8 +74,8 @@
       {{end}}
 
       <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="7000">
-          <div class="toast-header">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="999000">
+          <div class="toast-header subtle-background">
             <i class="tf-ion-android-cart"></i>
             &nbsp;&nbsp;
             <strong class="mr-auto">Added!</strong>
@@ -83,8 +83,9 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="toast-body">
-            <a href="#createYourOwn">Review your box.</a>
+          <div class="toast-body subtle-background px-5 py-4">
+            <div>Your total is <span class="total"></span></div>
+            <a alt="Review your box" id="reviewYourBox" href="#">Review your box.</a>
           </div>
         </div>
       </div>

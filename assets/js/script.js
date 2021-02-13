@@ -42,6 +42,10 @@ $(window).on('load', function () {
   // create your own boxes
   var resetSelection = function() {
     var snipcartButton = document.getElementById("snipcartButton");
+
+    $("#reviewYourBox").on('click', function() {
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    });
     
     // set all the options to default
     // first three customs are Note, Card choice, Card Text.
@@ -77,7 +81,7 @@ $(window).on('load', function () {
       i++;
     });
 
-    $("#total").text("£" + (totalCost/100.0).toFixed(2).toString());    
+    $(".total").text("£" + (totalCost/100.0).toFixed(2).toString());    
     $("#liveToast").toast("show");
   }
 
