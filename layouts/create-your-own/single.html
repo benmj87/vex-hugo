@@ -50,7 +50,7 @@
 
             <div data-option-name="{{.option_name}}" data-option-price="{{.price}}"
               class="mini d-none col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
-              <div class="block">
+              <div class="block" data-toggle="tooltip" data-placement="top" title="{{.option_name }} - &pound;{{ lang.NumFmt 2 (div .price 100.0) }}">
                 <div class="gallery-overlay pointer">
                   <div class="gallery-popup">
                     <i class="tf-ion-android-cancel"></i>
