@@ -103,6 +103,10 @@ $(window).on('load', function () {
         mini.removeClass("d-none");
         $("#selectedProductsRow").append(mini);
         $("#selectedProducts").slideDown();
+
+        if ($("#selectedProductsRow .mini").length === 1) {
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
       } else {
         alert('Maximum of 5 products');
       }
