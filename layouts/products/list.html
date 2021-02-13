@@ -23,7 +23,7 @@
             </a>
           </div>
           {{end}}
-          <img class="img-fluid" src="{{range first 1 .Params.images}}{{.|absURL}}{{end}}" alt="{{.Title}}">
+          <img class="img-fluid" src="{{range first 1 .Params.images}}{{.|absURL}}{{end}}" alt="{{.Title}}" loading="lazy">
         </div>
         <div class="product-info">
           <h4 class="mb-2">{{.Title}}</h4>
