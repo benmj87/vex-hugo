@@ -14,16 +14,19 @@ $(window).on('load', function () {
     });
 
     $(".card").on("click", function(e) {
-      var note = $(e.currentTarget).find(".note");
+      var note = $(e.currentTarget).parent().find(".note");
       var val = $(e.currentTarget).find("input[type=radio]").prop("value");
       if (note.is(":hidden") || val === "None") {
         // check its not already displayed or if none we want to slide down any that are
         $(".note").slideUp();
         note.slideDown();
+        snipcartButton.setAttribute("data-item-custom3-value", $(e.currentTarget).parent().find("textarea").val());
       }
 
       $(e.currentTarget).find("input[type=radio]").prop("checked", true);
       snipcartButton.setAttribute("data-item-custom2-value", val);
+      $(".selected").removeClass("selected");
+      $(this).addClass("selected");
     });
 
     // Get the button that opens the modal

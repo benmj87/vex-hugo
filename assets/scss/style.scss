@@ -692,9 +692,22 @@ textarea.form-control {
 }
 
 .card-options {
+  .card.selected {
+    border: solid 2px #666;
+  }
+
   .card-text {
+    text-align: center;
+
+    .price {
+      font-size: small;
+    }
+    
+    input {
+      display: none;
+    }
+
     span {
-      margin-left: 1rem;
       font-weight: 900;
     }
 
@@ -760,8 +773,4 @@ textarea.form-control {
     margin-left: auto;
     margin-right: auto;
   }
-}
-
-.card-text span {
-  word-break: break-all;
 }
