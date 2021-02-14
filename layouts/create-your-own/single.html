@@ -23,9 +23,16 @@
           </div>
         </div>
         <div id="selectedProductsRow" class="row">
-          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
+          <div class="col-lg-3 col-md-4 col-sm-4 mb-2 mini-product">
             <div class="block" data-toggle="tooltip" data-placement="top" title="{{ .Params.packaging_image_alt }}">
-              <img class="img-fluid border-radius" src="{{ .Params.packaging_image | absURL }}" alt="{{ .Params.packaging_image_alt }}">
+              <img class="img-fluid border-radius" src="{{ .Params.packaging_image | absURL }}"
+                alt="{{ .Params.packaging_image_alt }}">
+            </div>
+            <div class="p-3">
+              <h4 class="mb-2">Box Price</h4>
+              <p class="price">
+                &pound;2.75
+              </p>
             </div>
           </div>
         </div>
@@ -41,7 +48,7 @@
       </div>
 
       {{ range .Params.products }}
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-2 mb-4">
         <div class="block">
           <div class="gallery-overlay pointer product">
             <div class="gallery-popup">
@@ -49,14 +56,21 @@
             </div>
 
             <div data-option-name="{{.option_name}}" data-option-price="{{.price}}"
-              class="mini d-none col-lg-2 col-md-3 col-sm-4 col-xs-1 mb-2">
-              <div class="block" data-toggle="tooltip" data-placement="top" title="{{.option_name }} - &pound;{{ lang.NumFmt 2 (div .price 100.0) }}">
+              class="mini d-none col-lg-3 col-md-4 col-sm-4 mini-product mb-2">
+              <div class="block" data-toggle="tooltip" data-placement="top"
+                title="{{.option_name }} - &pound;{{ lang.NumFmt 2 (div .price 100.0) }}">
                 <div class="gallery-overlay pointer">
                   <div class="gallery-popup">
                     <i class="tf-ion-android-cancel"></i>
                   </div>
                 </div>
                 <img class="img-fluid border-radius" src="{{ .image | absURL }}" alt="{{.name}}" loading="lazy">
+              </div>
+              <div class="p-3">
+                <h4 class="mb-2">{{.name}}</h4>
+                <p class="price">
+                  &pound;{{ lang.NumFmt 2 (div .price 100.0) }}
+                </p>
               </div>
             </div>
           </div>
@@ -74,7 +88,8 @@
       {{end}}
 
       <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="999000">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
+          data-delay="999000">
           <div class="toast-header subtle-background">
             <i class="tf-ion-android-cart"></i>
             &nbsp;&nbsp;
