@@ -99,18 +99,31 @@ $(window).on('load', function () {
       }
     }
 
+    var processMini = function(mini) {
+      mini.on('click', miniHandler);
+
+      mini.removeClass("d-none");
+      $("#selectedProductsRow").append(mini);
+      $("#selectedProducts").slideDown();
+
+      if ($("#selectedProductsRow .mini").length === 1) {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      }
+    }
+
+    $(".create-your-own-add").on('click', function() {
+      if ($("#selectedProductsRow .mini").length < 5) {
+        processMini($(this).parent().parent().find('.mini').clone());       
+      } else {
+        alert('Maximum of 5 products');
+      }
+      
+      resetSelection();
+    });
+
     $(".product").on('click', function() {
       if ($("#selectedProductsRow .mini").length < 5) {
-        var mini = $(this).find('.mini').clone();
-        mini.on('click', miniHandler);
-
-        mini.removeClass("d-none");
-        $("#selectedProductsRow").append(mini);
-        $("#selectedProducts").slideDown();
-
-        if ($("#selectedProductsRow .mini").length === 1) {
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
+        processMini($(this).find('.mini').clone());
       } else {
         alert('Maximum of 5 products');
       }

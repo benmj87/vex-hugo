@@ -23,7 +23,7 @@
           </div>
         </div>
         <div id="selectedProductsRow" class="row">
-          <div class="col-lg-3 col-md-4 col-sm-4 mb-2 mini-product">
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2 mini-product">
             <div class="block" data-toggle="tooltip" data-placement="top" title="{{ .Params.packaging_image_alt }}">
               <img class="img-fluid border-radius" src="{{ .Params.packaging_image | absURL }}"
                 alt="{{ .Params.packaging_image_alt }}">
@@ -56,7 +56,7 @@
             </div>
 
             <div data-option-name="{{.option_name}}" data-option-price="{{.price}}"
-              class="mini d-none col-lg-3 col-md-4 col-sm-4 mini-product mb-2">
+              class="mini d-none col-xl-2 col-lg-3 col-md-4 col-sm-4 mini-product mb-2">
               <div class="block" data-toggle="tooltip" data-placement="top"
                 title="{{.option_name }} - &pound;{{ lang.NumFmt 2 (div .price 100.0) }}">
                 <div class="gallery-overlay pointer">
@@ -77,12 +77,10 @@
           <img class="img-fluid border-radius" src="{{ .image | absURL }}" alt="{{.name}}" loading="lazy">
         </div>        
 
-        <div class="">
-          <div class="d-flex justify-content-center mb-4 col">
-            <button class="btn btn-main py-1">
-              Add
-            </button>
-          </div>
+        <div class="d-flex justify-content-center mb-4 col">
+          <button class="btn btn-main py-1 create-your-own-add">
+            Add
+          </button>
         </div>
 
         <div class="product-info">
