@@ -20,7 +20,12 @@ $(window).on('load', function () {
         // check its not already displayed or if none we want to slide down any that are
         $(".note").slideUp();
         note.slideDown();
-        snipcartButton.setAttribute("data-item-custom3-value", $(e.currentTarget).parent().find("textarea").val());
+
+        if ($(e.currentTarget).parent().find("textarea").length > 0) {
+          snipcartButton.setAttribute("data-item-custom3-value", $(e.currentTarget).parent().find("textarea").val());
+        } else {
+          snipcartButton.setAttribute("data-item-custom3-value", "");
+        }
       }
 
       $(e.currentTarget).find("input[type=radio]").prop("checked", true);
