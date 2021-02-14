@@ -66,7 +66,7 @@
                 </div>
                 <img class="img-fluid border-radius" src="{{ .image | absURL }}" alt="{{.name}}" loading="lazy">
               </div>
-              <div class="p-3">
+              <div class="px-1 py-0">
                 <h4 class="mb-2">{{.name}}</h4>
                 <p class="price">
                   &pound;{{ lang.NumFmt 2 (div .price 100.0) }}
