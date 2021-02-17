@@ -4,6 +4,15 @@
       <div class="col-md-12">
         <div class="block">
           <a href="{{ site.BaseURL | relLangURL }}" class="mb-4 d-inline-block">{{ if site.Params.logo }} <img src="{{ site.Params.logo | absURL }}" alt="{{ site.Title }}" {{with site.Params.logo_width}}width="{{.}}"{{end}}> {{ else }} {{ .Title }} {{ end }}</a>
+          
+          <ul class="list-inline footer-menu">
+            {{ range site.Params.socialmedia}}
+            <li class="list-inline-item mb-4">
+              <a href="{{ .link }}"><i class="fab {{ .icon }} fa-2x"></i></a>
+            </li>
+            {{ end }}
+          </ul>
+
           <ul class="list-inline footer-menu">
             {{ range site.Menus.footer }}
             <li class="list-inline-item">
