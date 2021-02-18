@@ -750,6 +750,12 @@ textarea.form-control {
   display: none;
 }
 
+i.remove {
+  z-index: 1000;
+  top: 6px;
+  right: 6px;
+}
+
 
 .mini-product {
   text-align: center;

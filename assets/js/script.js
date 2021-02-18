@@ -89,7 +89,7 @@ $(window).on('load', function () {
       i++;
     });
 
-    $(".total").text("£" + (totalCost/100.0).toFixed(2).toString());    
+    $(".total").text("£" + (totalCost/100.0).toFixed(2).toString());
     $("#liveToast").toast("show");
   }
 
@@ -101,6 +101,7 @@ $(window).on('load', function () {
       if ($("#selectedProductsRow .mini").length === 1) {
         $("#selectedProducts").slideUp(function () {
           mini.remove();
+          $("#liveToast").toast("hide");
         });
       } else {
         mini.remove();
