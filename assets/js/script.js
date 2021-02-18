@@ -105,6 +105,8 @@ $(window).on('load', function () {
       } else {
         mini.remove();
       }
+
+      resetSelection();
     }
 
     var processMini = function(mini) {
