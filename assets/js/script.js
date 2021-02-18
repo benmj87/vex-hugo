@@ -146,7 +146,7 @@ $(window).on('load', function () {
       if ($("#selectedProductsRow .mini").length < maxSelection) {
         processMini($(this).find('.mini').clone());
       } else {
-        alert('Maximum of 5 products');
+        alert("Maximum of " + maxSelection + " products");
       }
       
       resetSelection();
