@@ -96,6 +96,16 @@ $(window).on('load', function () {
   if (document.querySelector("#createYourOwn")) {    
     $("#liveToast").toast();
 
+    // calculate the maximum number of options
+    // the options are held against the snipcart button and stored in the options
+    var snipcartButton = document.getElementById("snipcartButton");
+    var maxSelection = 0;
+    var maxSelectionStartingPoint = 4; // first three options are Note, Card choice, Card Text.  
+    while (snipcartButton.hasAttribute("data-item-custom" + maxSelectionStartingPoint + "-name")) {
+      maxSelection++;
+      maxSelectionStartingPoint++;
+    }
+
     var miniHandler = function() {
       var mini = $(this);
       if ($("#selectedProductsRow .mini").length === 1) {
@@ -123,17 +133,17 @@ $(window).on('load', function () {
     }
 
     $(".create-your-own-add").on('click', function() {
-      if ($("#selectedProductsRow .mini").length < 5) {
+      if ($("#selectedProductsRow .mini").length < maxSelection) {
         processMini($(this).parent().parent().find('.mini').clone());       
       } else {
-        alert('Maximum of 5 products');
+        alert("Maximum of " + maxSelection + " products");
       }
       
       resetSelection();
     });
 
     $(".product").on('click', function() {
-      if ($("#selectedProductsRow .mini").length < 5) {
+      if ($("#selectedProductsRow .mini").length < maxSelection) {
         processMini($(this).find('.mini').clone());
       } else {
         alert('Maximum of 5 products');
