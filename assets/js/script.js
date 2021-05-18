@@ -22,7 +22,8 @@ $(window).on('load', function () {
         keyboard: false,
         focus: true,
         show: true,
-      });    }
+      });
+    }
   }
 
   if (document.querySelector("#openModal")) {
