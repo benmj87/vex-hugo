@@ -35,7 +35,11 @@
             data-item-custom1-name="Notes"
             data-item-custom1-type="textarea"
             data-item-stackable="never"
-            data-item-weight="1000"
+            {{if .Params.requireAlcoholWarning}}
+              data-item-weight="101000"
+            {{else}}
+              data-item-weight="1000"
+            {{end}}
             {{ if .Params.options }}
               {{ range $index, $element := .Params.options }}
                 {{ $customIndex := add $index 2 }}
@@ -50,7 +54,9 @@
     </div>
   </div>
 
-  {{- partial "alcohol-modal.html" . -}}
+  {{if .Params.requireAlcoholWarning}}
+    {{- partial "alcohol-modal.html" . -}}
+  {{end}}
 </section>
 {{end}}
 
