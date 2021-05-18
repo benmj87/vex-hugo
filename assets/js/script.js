@@ -1,10 +1,29 @@
-// Preloader js    
+// Preloader js
 $(window).on('load', function () {
   $('.preloader').fadeOut(100);
 });
 
 (function ($) {
   'use strict';
+
+  if ($("#alcoholAgeCheck").length > 0) {
+    if (Cookies.get("age-verified") === undefined || Cookies.get("age-verified") !== "pass") {
+      $("#alcoholModalConfirm").on("click", function(e) {
+        Cookies.set("age-verified", "pass");
+        $("#alcoholAgeCheck").modal("hide");
+      });
+
+      $("#alcoholModalReject").on("click", function(e) {
+        window.history.back();
+      });
+
+      $("#alcoholAgeCheck").modal({
+        backdrop: "static",
+        keyboard: false,
+        focus: true,
+        show: true,
+      });    }
+  }
 
   if (document.querySelector("#openModal")) {
     var snipcartButton = document.querySelector("#snipcartButton");
@@ -44,7 +63,7 @@ $(window).on('load', function () {
     // When the user clicks on the button, open the modal
     btn.onclick = function() {
       $("#modalSelector").modal({});
-    }  
+    }
   }
 
   // create your own boxes
@@ -54,7 +73,7 @@ $(window).on('load', function () {
     $("#reviewYourBox").on('click', function() {
       $("html, body").animate({ scrollTop: 0 }, "slow");
     });
-    
+
     // set all the options to default
     // first three customs are Note, Card choice, Card Text.
     var i = 4;
@@ -68,9 +87,9 @@ $(window).on('load', function () {
 
       i++;
     }
-    
+
     // work through the choices in the #selectedProductsRow and set them in the snipcart button
-    // first three options are Note, Card choice, Card Text.  
+    // first three options are Note, Card choice, Card Text.
     var i = 4;
     var startingCost = parseInt(snipcartButton.getAttribute("data-item-price").replace(/\./, '')); // get the starting price from the snipcart button but remove the . so its in pence
     var totalCost = startingCost;
@@ -93,14 +112,14 @@ $(window).on('load', function () {
     $("#liveToast").toast("show");
   }
 
-  if (document.querySelector("#createYourOwn")) {    
+  if (document.querySelector("#createYourOwn")) {
     $("#liveToast").toast();
 
     // calculate the maximum number of options
     // the options are held against the snipcart button and stored in the options
     var snipcartButton = document.getElementById("snipcartButton");
     var maxSelection = 0;
-    var maxSelectionStartingPoint = 4; // first three options are Note, Card choice, Card Text.  
+    var maxSelectionStartingPoint = 4; // first three options are Note, Card choice, Card Text.
     while (snipcartButton.hasAttribute("data-item-custom" + maxSelectionStartingPoint + "-name")) {
       maxSelection++;
       maxSelectionStartingPoint++;
@@ -134,11 +153,11 @@ $(window).on('load', function () {
 
     $(".create-your-own-add").on('click', function() {
       if ($("#selectedProductsRow .mini").length < maxSelection) {
-        processMini($(this).parent().parent().find('.mini').clone());       
+        processMini($(this).parent().parent().find('.mini').clone());
       } else {
         alert("Maximum of " + maxSelection + " products");
       }
-      
+
       resetSelection();
     });
 
@@ -148,7 +167,7 @@ $(window).on('load', function () {
       } else {
         alert("Maximum of " + maxSelection + " products");
       }
-      
+
       resetSelection();
     });
 
@@ -159,11 +178,11 @@ $(window).on('load', function () {
       } else {
         alert('Minimum of 2 products');
       }
-      
+
       resetSelection();
     };
   }
-  
+
   // product Slider
   $('.product-image-slider').slick({
     autoplay: false,
