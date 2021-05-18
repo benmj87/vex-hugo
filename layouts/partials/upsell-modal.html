@@ -100,12 +100,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="snipcart-add-item btn btn-main" 
+        <button class="snipcart-add-item btn btn-main"
           id="snipcartButton"
           data-item-id="{{.Title | urlize}}__{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}"
           data-item-name="{{.Title}}"
           data-item-image="{{range first 1 .Params.Images}}{{. | absURL}}{{end}}"
-          data-item-price="{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}" data-item-url="{{.Permalink}}" 
+          data-item-price="{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}" data-item-url="{{.Permalink}}"
           data-item-custom1-name="Notes"
           data-item-custom1-type="textarea"
           data-item-custom2-name="Card"
@@ -114,13 +114,17 @@
           data-item-custom3-name="Card Text"
           data-item-custom3-type="textarea"
           data-item-stackable="never"
-          data-item-weight="1000"
+          {{if .Params.requireAlcoholWarning}}
+            data-item-weight="101000"
+          {{else}}
+            data-item-weight="1000"
+          {{end}}
           {{ if .Params.options }}
             {{ range $index, $element := .Params.options }}
               {{ $customIndex := add $index 4 }}
               data-item-custom{{$customIndex}}-name="{{ $element.name }}"
               data-item-custom{{$customIndex}}-options="{{ $element.choices }}"
-            {{ end }}      
+            {{ end }}
           {{ end }}>{{i18n "add_to_cart"}}
         </button>
       </div>
