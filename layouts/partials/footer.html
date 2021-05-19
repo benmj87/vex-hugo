@@ -30,15 +30,20 @@
 
 <!-- Snipcart public key -->
 {{with site.Params.snipcart_api}}
-  <div hidden id="snipcart" data-api-key="{{.}}"></div>
   <div id="snipcart" data-api-key="{{.}}" hidden>
     <address-fields section="top">
       <div>
-        <snipcart-label for="phone">
-            Phone number
-        </snipcart-label>
-        <snipcart-input name="phone">
-        </snipcart-input>
+        <div class="mt-2">
+          <snipcart-label for="phone">
+              Phone number
+          </snipcart-label>
+          <snipcart-input name="phone">
+          </snipcart-input>
+        </div>
+        <div class="mt-3">
+          <snipcart-checkbox name="no-marketing"></snipcart-checkbox>
+          <snipcart-label for="no-marketing">Please click here if you do NOT wish to be contacted for marketing</snipcart-label>
+        </div>
       </div>
     </address-fields>
   </div>
