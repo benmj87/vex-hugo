@@ -120,7 +120,7 @@ $(window).on('load', function () {
     // the options are held against the snipcart button and stored in the options
     var snipcartButton = document.getElementById("snipcartButton");
     var maxSelection = 0;
-    var maxSelectionStartingPoint = 4; // first three options are Note, Card choice, Card Text.
+    var maxSelectionStartingPoint = 5; // first three options are Note, Card choice, Card Text and alcohol hidden option
     while (snipcartButton.hasAttribute("data-item-custom" + maxSelectionStartingPoint + "-name")) {
       maxSelection++;
       maxSelectionStartingPoint++;

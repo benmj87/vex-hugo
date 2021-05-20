@@ -40,9 +40,16 @@
             {{else}}
               data-item-weight="1000"
             {{end}}
+            data-item-custom2-type="hidden"
+            data-item-custom2-name="alcohol"
+            {{if .Params.requireAlcoholWarning}}
+              data-item-custom2-value="true"
+            {{else}}
+              data-item-custom2-value="false"
+            {{end}}
             {{ if .Params.options }}
               {{ range $index, $element := .Params.options }}
-                {{ $customIndex := add $index 2 }}
+                {{ $customIndex := add $index 3 }}
                 data-item-custom{{$customIndex}}-name="{{ $element.name }}"
                 data-item-custom{{$customIndex}}-options="{{ $element.choices }}"
               {{ end }}
