@@ -2,6 +2,7 @@
 <html lang="{{ with site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
     {{- partial "head.html" . -}}
     <body id="body">
+        {{- partial "cookie-banner.html" . -}}
         {{- partial "preloader.html" . -}}
         {{- partial "header.html" . -}}
         {{- block "main" . }}{{- end }}
