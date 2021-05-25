@@ -76,6 +76,10 @@ $(window).on('load', function () {
     });
 
     // set all the options to default
+    // set alcohol hidden
+    var alcoholCustomOptionIndex = 4; // configured in the upsell-modal.html
+    snipcartButton.setAttribute("data-item-custom" + alcoholCustomOptionIndex + "-value", "false");
+
     // first four customs are Note, Card choice, Card Text, alcohol.
     var i = 5;
     while (snipcartButton.hasAttribute("data-item-custom" + i + "-name")) {
@@ -104,6 +108,10 @@ $(window).on('load', function () {
         alert("Invalid option chosen");
       } else {
         snipcartButton.setAttribute("data-item-custom" + i + "-value", em.getAttribute("data-option-name"));
+        if (em.getAttribute("data-option-alcohol") === "true") {
+          // set alcohol hidden
+          snipcartButton.setAttribute("data-item-custom" + alcoholCustomOptionIndex + "-value", "true");
+        }
       }
 
       i++;
