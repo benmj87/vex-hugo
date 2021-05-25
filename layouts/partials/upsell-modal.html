@@ -132,11 +132,7 @@
             data-item-custom4-value="false"
           {{end}}
           data-item-stackable="never"
-          {{if .Params.requireAlcoholWarning}}
-            data-item-weight="101000"
-          {{else}}
-            data-item-weight="1000"
-          {{end}}
+          data-item-weight="1000"
           {{ if .Params.options }}
             {{ range $index, $element := .Params.options }}
               {{ $customIndex := add $index 5 }}

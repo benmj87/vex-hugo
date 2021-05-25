@@ -6,7 +6,7 @@ $(window).on('load', function () {
 (function ($) {
   'use strict';
 
-  if ($("#alcoholAgeCheck").length > 0) {
+  if ($("#alcoholAgeCheck").length > 0 && $("#createYourOwn").length === 0) {
     if (Cookies.get("age-verified") === undefined || Cookies.get("age-verified") !== "pass") {
       $("#alcoholModalConfirm").on("click", function(e) {
         Cookies.set("age-verified", "pass");
@@ -76,11 +76,11 @@ $(window).on('load', function () {
     });
 
     // set all the options to default
-    // first three customs are Note, Card choice, Card Text.
-    var i = 4;
+    // first four customs are Note, Card choice, Card Text, alcohol.
+    var i = 5;
     while (snipcartButton.hasAttribute("data-item-custom" + i + "-name")) {
-      if (i <= 5) {
-        // start at 4, first two don't have a "None" option (minimum of two per order) so just remove the attribute
+      if (i <= 6) {
+        // start at 5, first two don't have a "None" option (minimum of two per order) so just remove the attribute
         snipcartButton.removeAttribute("data-item-custom" + i + "-value");
       } else {
         snipcartButton.setAttribute("data-item-custom" + i + "-value", "None");
@@ -90,8 +90,8 @@ $(window).on('load', function () {
     }
 
     // work through the choices in the #selectedProductsRow and set them in the snipcart button
-    // first three options are Note, Card choice, Card Text.
-    var i = 4;
+    // first four options are Note, Card choice, Card Text, alcohol
+    var i = 5;
     var startingCost = parseInt(snipcartButton.getAttribute("data-item-price").replace(/\./, '')); // get the starting price from the snipcart button but remove the . so its in pence
     var totalCost = startingCost;
     $("#selectedProductsRow .mini").each((_, em) => {
@@ -120,13 +120,13 @@ $(window).on('load', function () {
     // the options are held against the snipcart button and stored in the options
     var snipcartButton = document.getElementById("snipcartButton");
     var maxSelection = 0;
-    var maxSelectionStartingPoint = 5; // first three options are Note, Card choice, Card Text and alcohol hidden option
+    var maxSelectionStartingPoint = 5; // first four options are Note, Card choice, Card Text and alcohol hidden option
     while (snipcartButton.hasAttribute("data-item-custom" + maxSelectionStartingPoint + "-name")) {
       maxSelection++;
       maxSelectionStartingPoint++;
     }
 
-    var miniHandler = function() {
+    var removeProduct = function() {
       var mini = $(this);
       if ($("#selectedProductsRow .mini").length === 1) {
         $("#selectedProducts").slideUp(function () {
@@ -140,36 +140,60 @@ $(window).on('load', function () {
       resetSelection();
     }
 
-    var processMini = function(mini) {
-      mini.on('click', miniHandler);
-
-      mini.removeClass("d-none");
+    var addProduct = function(mini) {
       $("#selectedProductsRow").append(mini);
       $("#selectedProducts").slideDown();
 
       if ($("#selectedProductsRow .mini").length === 1) {
         $("html, body").animate({ scrollTop: 0 }, "slow");
       }
+
+      resetSelection();
+    }
+
+    var productClick = function(mini) {
+      mini.on('click', removeProduct);
+      mini.removeClass("d-none");
+
+      if (mini.attr("data-option-alcohol") === "true" && Cookies.get("age-verified") !== "pass") {
+        $("#alcoholModalConfirm").unbind("click");
+        $("#alcoholModalReject").unbind("click");
+
+        $("#alcoholModalConfirm").on("click", function(e) {
+          Cookies.set("age-verified", "pass");
+          $("#alcoholAgeCheck").modal("hide");
+          addProduct(mini);
+        });
+
+        $("#alcoholModalReject").on("click", function(e) {
+          $("#alcoholAgeCheck").modal("hide");
+        });
+
+        $("#alcoholAgeCheck").modal({
+          backdrop: "static",
+          keyboard: false,
+          focus: true,
+          show: true,
+        });
+      } else {
+        addProduct(mini);
+      }
     }
 
     $(".create-your-own-add").on('click', function() {
       if ($("#selectedProductsRow .mini").length < maxSelection) {
-        processMini($(this).parent().parent().find('.mini').clone());
+        productClick($(this).parent().parent().find('.mini').clone());
       } else {
         alert("Maximum of " + maxSelection + " products");
       }
-
-      resetSelection();
     });
 
     $(".product").on('click', function() {
       if ($("#selectedProductsRow .mini").length < maxSelection) {
-        processMini($(this).find('.mini').clone());
+        productClick($(this).find('.mini').clone());
       } else {
         alert("Maximum of " + maxSelection + " products");
       }
-
-      resetSelection();
     });
 
     document.getElementById("openModal").onclick = function() {
