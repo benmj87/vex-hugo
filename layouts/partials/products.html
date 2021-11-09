@@ -17,7 +17,7 @@
                 <i class="tf-ion-android-open"></i>
               </a>
             </div>
-            <img class="img-fluid" src="{{range first 1 .Params.images}}{{.|absURL}}{{end}}" alt="{{.Title}}">
+            <img loading="lazy" class="img-fluid" src="{{range first 1 .Params.images}}{{.|absURL}}{{end}}" alt="{{.Title}}">
           </div>
           {{ end }}
         </div>

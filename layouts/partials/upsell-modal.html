@@ -13,7 +13,7 @@
             {{ range site.Params.cards }}
               <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
                 <div class="card">
-                  <img class="card-img-top" src="{{ .image | absURL }}" alt="{{ .title }}">
+                  <img loading="lazy" class="card-img-top" src="{{ .image | absURL }}" alt="{{ .title }}">
                   <div class="card-body px-0 py-3">
                     <p class="card-text m-0"><input type="radio" name="card-choice" value="{{ .title }}"><span>{{ .title }}</span><br><span class="price">+£{{ .price }}</span></p>
                   </div>

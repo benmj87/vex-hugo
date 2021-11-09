@@ -14,8 +14,8 @@
         <div class="carousel-inner">
           {{ range $index, $item := .items }}
             <div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
-              <img class="desktop" alt="{{ $item.text }}" src="{{ $item.image }}">
-              <img class="mobile" alt="{{ $item.text }}" src="{{ $item.mobile_image }}">
+              <img class="desktop" alt="{{ $item.text }}" src="{{ $item.image }}" loading="lazy">
+              <img class="mobile" alt="{{ $item.text }}" src="{{ $item.mobile_image }}" loading="lazy">
               <div class="content w-50">
                 <a class="btn" href="{{ $item.button_link }}">{{ $item.button_text }}</a>
                 <p>{{ $item.text }}</p>
@@ -45,7 +45,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 text-center mb-5 mb-md-0">
-				<img class="img-fluid" src="{{ .image | absURL }}" alt="">
+				<img class="img-fluid" src="{{ .image | absURL }}" alt="" loading="lazy">
 			</div>
 			<div class="col-md-6 align-self-center text-center text-md-left">
 				<div class="block">
