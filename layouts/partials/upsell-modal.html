@@ -10,94 +10,19 @@
       <div class="modal-body card-options">
         <div class="container">
           <div class="row">
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/fathers-day-card.jpg" alt="Fathers day">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input type="radio" name="card-choice" value="Fathers day"><span>Fathers day</span><br><span class="price">+£3.00</span></p>
+            {{ range site.Params.cards }}
+              <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
+                <div class="card">
+                  <img class="card-img-top" src="{{ .image | absURL }}" alt="{{ .title }}">
+                  <div class="card-body px-0 py-3">
+                    <p class="card-text m-0"><input type="radio" name="card-choice" value="{{ .title }}"><span>{{ .title }}</span><br><span class="price">+£{{ .price }}</span></p>
+                  </div>
                 </div>
+                <p class="card-text note mt-2">
+                  <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
+                </p>
               </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
-              </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/love-card.jpg" alt="Love">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input type="radio" name="card-choice" value="Love"><span>Love</span><br><span class="price">+£3.00</span></p>
-                </div>
-              </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
-              </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/new-home-card.jpg" alt="New home">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input id="newHome" type="radio" name="card-choice" value="New home"><span>New home</span><br><span class="price">+£3.00</span></p>
-                </div>
-              </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="newHomeText" placeholder="Message"></textarea>
-              </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/congratulations-card.jpg" alt="Congratulations">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input id="congrats" type="radio" name="card-choice" value="Congratulations"><span>Congratulations</span><br><span class="price">+£3.00</span></p>
-                </div>
-              </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
-              </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/happy-birthday-card.jpg" alt="Happy birthday">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input type="radio" name="card-choice" value="Happy birthday"><span>Happy birthday</span><br><span class="price">+£3.00</span></p>
-                </div>
-              </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
-              </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/thank-you-card.jpg" alt="Thank you">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input type="radio" name="card-choice" value="Thank you"><span>Thank you</span><br><span class="price">+£3.00</span></p>
-                </div>
-              </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
-              </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/thinking-of-you-card.jpg" alt="Thinking of you">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input type="radio" name="card-choice" value="Thinking of you"><span>Thinking of you</span><br><span class="price">+£3.00</span></p>
-                </div>
-              </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
-              </p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
-              <div class="card">
-                <img class="card-img-top" src="/images/life-would-succ-without-you.jpg" alt="Life would succ">
-                <div class="card-body px-0 py-3">
-                  <p class="card-text m-0"><input type="radio" name="card-choice" value="Life would succ"><span>Life would succ</span><br><span class="price">+£3.00</span></p>
-                </div>
-              </div>
-              <p class="card-text note mt-2">
-                <textarea rows="4" id="congratsText" placeholder="Message"></textarea>
-              </p>
-            </div>
+            {{ end }}
           </div>
           <div class="row">
             <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
@@ -121,7 +46,7 @@
           data-item-custom1-type="textarea"
           data-item-custom2-name="Card"
           data-item-custom2-value="None"
-          data-item-custom2-options="None|Fathers day[+3.00]|Love[+3.00]|New home[+3.00]|Congratulations[+3.00]|Happy birthday[+3.00]|Thank you[+3.00]|Thinking of you[+3.00]|Life would succ[+3.00]"
+          data-item-custom2-options="None{{ range site.Params.cards }}|{{ .title }}[+{{ .price }}]{{ end }}"
           data-item-custom3-name="Card Text"
           data-item-custom3-type="textarea"
           data-item-custom4-type="hidden"
