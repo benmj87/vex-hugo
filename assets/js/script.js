@@ -29,6 +29,8 @@ $(window).on('load', function () {
   if (document.querySelector("#openModal")) {
     var snipcartButton = document.querySelector("#snipcartButton");
 
+    $("#btnSkip").on("click", () => snipcartButton.click());
+
     $(".note").on('keyup', function(e) {
       // set the text on the note for the card
       snipcartButton.setAttribute("data-item-custom3-value", e.target.value);
