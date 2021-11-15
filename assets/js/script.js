@@ -29,7 +29,12 @@ $(window).on('load', function () {
   if (document.querySelector("#openModal")) {
     var snipcartButton = document.querySelector("#snipcartButton");
 
-    $("#btnSkip").on("click", () => snipcartButton.click());
+    $("#btnSkip").on("click", () => {
+      // clear card text and choice
+      snipcartButton.setAttribute("data-item-custom2-value", "None");
+      snipcartButton.setAttribute("data-item-custom3-value", "");
+      snipcartButton.click()
+    });
 
     $(".note").on('keyup', function(e) {
       // set the text on the note for the card
