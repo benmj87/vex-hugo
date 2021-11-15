@@ -49,7 +49,7 @@
       </div>
 
       {{ range .Params.products }}
-      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-2 mb-4">
+      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
         <div class="block">
           <div class="gallery-overlay pointer product">
             <div class="gallery-popup">
@@ -66,7 +66,7 @@
                     <i class="tf-ion-android-cancel"></i>
                   </div>
                 </div>
-                <img class="img-fluid border-radius" src="{{ .image | absURL }}" alt="{{.name}}" loading="lazy">
+                <img class="img-fluid border-radius" src='{{ path.Join "/images/thumbs/" (path.Base .image) | absURL }}' alt="{{.name}}" loading="lazy">
               </div>
               <div class="px-1 py-0">
                 <h4 class="mb-2">{{.name}}</h4>
@@ -76,7 +76,7 @@
               </div>
             </div>
           </div>
-          <img class="img-fluid border-radius" src="{{ .image | absURL }}" alt="{{.name}}" loading="lazy">
+          <img class="img-fluid border-radius" src='{{ path.Join "/images/thumbs/" (path.Base .image) | absURL }}' alt="{{.name}}" loading="lazy">
         </div>
 
         <div class="d-flex justify-content-center mb-4 col">
