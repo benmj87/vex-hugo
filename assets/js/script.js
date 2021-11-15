@@ -30,6 +30,7 @@ $(window).on('load', function () {
     var snipcartButton = document.querySelector("#snipcartButton");
 
     $(".note").on('keyup', function(e) {
+      // set the text on the note for the card
       snipcartButton.setAttribute("data-item-custom3-value", e.target.value);
     });
 
@@ -42,13 +43,17 @@ $(window).on('load', function () {
         note.slideDown();
 
         if ($(e.currentTarget).parent().find("textarea").length > 0) {
+          // set the text on the note for the card
           snipcartButton.setAttribute("data-item-custom3-value", $(e.currentTarget).parent().find("textarea").val());
         } else {
+          // clear the text on the note for the card
           snipcartButton.setAttribute("data-item-custom3-value", "");
         }
       }
 
       $(e.currentTarget).find("input[type=radio]").prop("checked", true);
+
+      // set the selected card in the button
       snipcartButton.setAttribute("data-item-custom2-value", val);
       $(".selected").removeClass("selected");
       $(this).addClass("selected");
