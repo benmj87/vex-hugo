@@ -1,10 +1,11 @@
 <head>
   <meta charset="utf-8">
-  <title>{{ with .Params.metaTitle }}{{ . }}{{ else }}{{ .Title }}{{ end }}</title>
+  <title>{{ with .Params.title }}{{ . }}{{ else }}{{ .Params.metaTitle }}{{ end }}</title>
 
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="{{ with .Params.metaTitle }}{{ . }}{{ else }}{{ with .Description }}{{ . }}{{ else }}{{ with site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+  <meta name="title" content="{{ with .Params.metaTitle }}{{ . }}{{ else }}{{ .Params.title }}{{ end }}">
+  <meta name="description" content="{{ with .Params.metaDescription }}{{ . }}{{ else }}{{ with .Params.description }}{{ . }}{{ else }}{{ with site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
   {{ with site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
   {{ hugo.Generator }}
 
