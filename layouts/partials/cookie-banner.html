@@ -1,9 +1,10 @@
 <script>
   var setAnalyticCookies = function() {
     if (Cookies.get("cookieAnalyticsAllowed") === "true") {
+      console.log("Injecting analytics code");
       analyticsCode = analyticsCode.replaceAll("gatoken", "{{ site.Params.googleAnalytics }}");
       analyticsCode = analyticsCode.replaceAll("pixeltoken", "{{ site.Params.facebookPixel }}");
-      document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeend', analyticsCode)
+      $("body").append(analyticsCode);
     }
   };
 

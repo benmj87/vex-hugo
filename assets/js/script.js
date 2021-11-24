@@ -1,13 +1,11 @@
-var analyticsCode = `<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=gatoken"></script>
+var analyticsCode = `
+<script src="https://www.googletagmanager.com/gtag/js?id=gatoken"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'gatoken');
 </script>
-
-<!-- Facebook Pixel Code -->
 <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -25,7 +23,7 @@ var analyticsCode = `<!-- Global site tag (gtag.js) - Google Analytics -->
   src="https://www.facebook.com/tr?id=pixeltoken&ev=PageView
   &noscript=1"/>
   </noscript>
-  <!-- End Facebook Pixel Code -->`;
+`;
 
 // Preloader js
 $(window).on('load', function () {
