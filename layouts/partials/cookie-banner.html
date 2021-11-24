@@ -1,9 +1,53 @@
-<div class="alert alert-light" role="alert">
-  <h4 class="alert-heading"><i class="fas fa-cookie-bite fa-1x"></i>&nbsp;&nbsp;Cookies nom nom</h4>
-  <p class="mt-3">We use cookies to help us track the items you view on our website. We don't use this for direct marketing, nor do we track you personally. Please read our <a href="/general/cookies">cookie policy</a> for more info.</p>
-  <hr>
-  <p class="mt-0">
-    <button class="btn btn-main btn-main-sm mt-2">No thanks</button>
-    <button class="btn btn-main btn-main-sm mt-2">Ok I like cookies</button>
-  </p>
+<script>
+  var setAnalyticCookies = function() {
+    if (Cookies.get("cookieAnalyticsAllowed") === "true") {
+      analyticsCode = analyticsCode.replaceAll("gatoken", "{{ site.Params.googleAnalytics }}");
+      analyticsCode = analyticsCode.replaceAll("pixeltoken", "{{ site.Params.facebookPixel }}");
+      document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeend', analyticsCode)
+    }
+  };
+
+  $(window).on('load', function() {
+    if (Cookies.get("cookieBannerSet") !== "true" && !window.location.pathname.replaceAll("/", "").endsWith("cookie-policy")) {
+      $("#modalCookie").modal();
+    } else {      
+      setAnalyticCookies();
+    }
+
+    $("#cookieContinue").on("click", function() {
+      Cookies.set("cookieBannerSet", "true");
+      if ($("#analyticCookies").is(":checked")) {
+        Cookies.set("cookieAnalyticsAllowed", "true");
+      }
+      
+      setAnalyticCookies();
+      $("#modalCookie").modal("hide");
+    });
+  });
+</script>
+
+<div class="modal fade" id="modalCookie" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="alert-heading"><i class="fas fa-cookie-bite fa-1x"></i>&nbsp;&nbsp;Cookie Preferences</h4>  
+      </div>
+      <div class="modal-body">
+        <p>Please read our <a href='{{ "general/cookie-policy" | absURL }}'>cookie policy</a> for further details.</p>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" checked="checked" class="custom-control-input" disabled id="requiredCookies">
+          <label class="custom-control-label" for="requiredCookies"><h5>Necessary Cookies</h5></label>
+          <p>Necessary cookies enable core functionality. You may disable these by changing your browser settings, but this may affect how the website functions.</p>
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" checked="checked" class="custom-control-input" id="analyticCookies">
+          <label class="custom-control-label" for="analyticCookies"><h5>Analytics Cookies</h5></label>
+          <p>We'd like to set Google Analytics and Facebook Pixel cookies to help us improve our website by collecting and reporting information on how you use it. The cookies collect information in a way that does not directly identify anyone.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cookieContinue" class="btn btn-main btn-main-sm mt-2">Continue</button>
+      </div>
+    </div>
+  </div>
 </div>
