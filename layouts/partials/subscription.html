@@ -9,8 +9,11 @@
         <h2 class="subheading text-white">{{ .title | markdownify }}</h2>
         <p class="text-white">{{ .content | markdownify }}</p>
         <div class="input-group">
-          <form action="{{ site.Params.mailinglist_form_action }}" method="post" class="w-100" name="mc-embedded-subscribe-form" target="_blank">
-            <input type="email" id="mce-EMAIL" class="form-control" name="EMAIL" placeholder="{{ .placeholder }}"
+          <form action="https://brownboxgiftcompany.us1.list-manage.com/subscribe/post" method="post" class="w-100" name="mc-embedded-subscribe-form" target="_blank">
+            <input type="hidden" name="u" value="f92e9cdc5d717244153eccb67">
+            <input type="hidden" name="id" value="64de7bdc4c">
+            
+            <input type="email" id="MERGE0" class="form-control" name="MERGE0" placeholder="{{ .placeholder }}"
               required>
             <button class="btn btn-main btn-submit" type="submit" name="subscribe">{{i18n "subscribe"}}</button>
           </form>
