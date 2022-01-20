@@ -33,15 +33,63 @@ $(window).on('load', function () {
 (function ($) {
   'use strict';
 
-  if ($("#alcoholAgeCheck").length > 0 && $("#createYourOwn").length === 0) {
-    if (Cookies.get("age-verified") === undefined || Cookies.get("age-verified") !== "pass") {
+  var alcoholCookieMissing = function() {
+    return Cookies.get("age-verified") === undefined || Cookies.get("age-verified") !== "pass";
+  }
+
+  // this section handles the user changing to an alcohol option for the create your own box in the snipcart cart
+  document.addEventListener('snipcart.ready', () => {
+    Snipcart.events.on('item.updated', (cartItem) => {
+      if (createYourOwnAlcoholItems !== undefined) {
+        var cartContainsAlcohol = false;
+        for (var i = 5; i < cartItem.customFields.length; i++) {
+          // first 5 custom fields are card/alcohol etc etc 
+          if (createYourOwnAlcoholItems.indexOf(cartItem.customFields[i].value) > -1) {
+            cartContainsAlcohol = true;
+          }
+        }
+
+        if (cartContainsAlcohol && cartItem.customFields[3].value === 'false') {
+          cartItem.customFields[3].value = 'true';
+          Snipcart.api.cart.items.update(cartItem);
+        }
+        
+        /* var passed = () => {
+          if (alcoholSet === false) {
+            cartItem.customFields[3].value = 'true'; // set alcohol to true
+            alcoholSet = true;
+            updateCartItem(cartItem);
+          }
+        };
+        var rejected = () => {
+          Snipcart.api.cart.items.remove(cartItem)
+            .then(() => {
+              Snipcart.api.theme.cart.close()
+                .then(() => {                      
+                  $("#alcoholAgeCheck").modal("hide");
+                });
+            });
+          
+        };
+        showAlcoholCheck(passed, rejected); 
+
+        if (alcoholSet === false) {
+          cartItem.customFields[3].value = 'false'; // set alcohol to true
+          updateCartItem(cartItem);
+        }*/
+      }
+    });
+  });
+
+  if ($("#alcoholAgeCheck").length > 0 && $("#createYourOwn").length === 0) {    
+    if (alcoholCookieMissing() === false) {
       $("#alcoholModalConfirm").on("click", function(e) {
         Cookies.set("age-verified", "pass");
         $("#alcoholAgeCheck").modal("hide");
       });
 
       $("#alcoholModalReject").on("click", function(e) {
-        window.history.back();
+        window.history.back()
       });
 
       $("#alcoholAgeCheck").modal({

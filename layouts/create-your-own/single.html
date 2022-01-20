@@ -8,6 +8,13 @@
         <h1 class="font-weight-bold">{{.Title}}</h1>
       </div>
 
+      <script>
+        var createYourOwnAlcoholItems = [
+          // eslint-disable-next-line
+          {{ range .Params.products }}{{ if eq .alcohol_warning true }}'{{ .option_name }}',{{ end }}{{ end }}
+        ];
+      </script>
+
       <div class="col-12 text-center mb-4">
         <p>
           {{.Content}}

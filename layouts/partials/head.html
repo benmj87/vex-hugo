@@ -2,6 +2,9 @@
   <meta charset="utf-8">
   <title>{{ with .Params.title }}{{ . }}{{ else }}{{ .Params.metaTitle }}{{ end }}</title>
 
+  <link rel="preconnect" href="https://app.snipcart.com" />
+  <link rel="preconnect" href="https://cdn.snipcart.com" />
+
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="title" content="{{ with .Params.metaTitle }}{{ . }}{{ else }}{{ .Params.title }}{{ end }}">
