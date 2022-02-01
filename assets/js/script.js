@@ -33,6 +33,24 @@ $(window).on('load', function () {
 (function ($) {
   'use strict';
 
+  if ($("#productSearch").length > 0) {
+    $("#productSearch").on('keyup', function(e) {
+      var search = $("#productSearch").val().toLowerCase();
+      if (search.replace(/\s/, "") === "") {
+        $(".product-list").show();
+      } else {
+        $(".product-list").each((i, item) => {
+          var desc = $(item).find(":hidden").val().toLowerCase();
+          if (desc.indexOf(search) > -1) {
+            $(item).show();
+          } else {
+            $(item).hide();
+          }
+        });
+      }
+    });
+  }
+
   if ($("#alcoholAgeCheck").length > 0 && $("#createYourOwn").length === 0) {
     if (Cookies.get("age-verified") === undefined || Cookies.get("age-verified") !== "pass") {
       $("#alcoholModalConfirm").on("click", function(e) {

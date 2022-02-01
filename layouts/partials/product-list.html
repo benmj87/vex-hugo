@@ -5,6 +5,10 @@
         <h1 class="font-weight-bold">{{.Title}}</h1>
       </div>
 
+      <div class="col-12">        
+        <input type="text" id="productSearch">
+      </div>
+
       <div class="col-12 text-center mb-4">
         <p>
           {{.Content}}
@@ -12,7 +16,7 @@
       </div>
 
       {{ range .Pages }}
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4 product-list">
         <div class="block">
           {{if not .Params.coming_soon}}  
           <div class="gallery-overlay">
@@ -25,6 +29,7 @@
         </div>
         <div class="product-info">
           <h4 class="mb-2">{{.Title}}</h4>
+          <input type="hidden" value="{{ .Title }} {{ .Description }}">
           
           <p class="price">
             {{if not .Params.coming_soon}}
