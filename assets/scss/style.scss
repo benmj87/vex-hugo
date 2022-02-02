@@ -550,18 +550,20 @@ s.price {
   }
 }
 
-.form-control {
-  border: 1px solid #dadada;
-  border-radius: 35px;
-  height: 50px;
+.contactform {
+  .form-control {
+    border: 1px solid #dadada;
+    border-radius: 35px;
+    height: 50px;
 
-  &:focus {
-    border-color: $primary-color;
-    box-shadow: none;
-  }
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: none;
+    }
 
-  &::placeholder {
-    font-size: 80%;
+    &::placeholder {
+      font-size: 80%;
+    }
   }
 }
 
