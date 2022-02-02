@@ -15,10 +15,10 @@
   
         <input type="text" id="productSearch">
 
-        <select>
-          <option>Categories</option>
-          {{ range $categories | uniq }}
-            <option>{{ . }}</option>
+        <select id="productCategory">
+          <option value="">Categories</option>
+          {{ range $categories | sort | uniq }}
+            <option value="{{ . }}">{{ . }}</option>
           {{ end }}
         </select>
 
@@ -44,7 +44,8 @@
         </div>
         <div class="product-info">
           <h4 class="mb-2">{{.Title}}</h4>
-          <input type="hidden" value="{{ .Title }} {{ .Description }}">
+          <input type="hidden" class="description" value="{{ .Title }} {{ .Description }}">          
+          <input type="hidden" class="categories" value='{{ if .Params.categories }}{{ delimit .Params.categories "," }}{{ end }}'>
           
           <p class="price">
             {{if not .Params.coming_soon}}

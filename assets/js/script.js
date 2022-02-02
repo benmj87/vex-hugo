@@ -34,21 +34,34 @@ $(window).on('load', function () {
   'use strict';
 
   if ($("#productSearch").length > 0) {
-    $("#productSearch").on('keyup', function(e) {
+    var searchMethod = function(e) {
       var search = $("#productSearch").val().toLowerCase();
-      if (search.replace(/\s/, "") === "") {
+      var searchEmpty = search.replace(/\s/, "") === "";
+      var category = $("#productCategory option:selected").val().toLowerCase();
+      var categoryEmpty = category === "";
+
+      if (searchEmpty && categoryEmpty) {
         $(".product-list").show();
       } else {
         $(".product-list").each((i, item) => {
-          var desc = $(item).find(":hidden").val().toLowerCase();
-          if (desc.indexOf(search) > -1) {
+          var desc = $(item).find("input.description").val().toLowerCase();
+          var cats = $(item).find("input.categories").val().toLowerCase();
+
+          if (desc.indexOf(search) > -1 && cats.indexOf(category) > -1) {
+            $(item).show();
+          } else if (desc.indexOf(search) > -1 && categoryEmpty) {
+            $(item).show();
+          } else if (categoryEmpty && cats.indexOf(category) > -1) {
             $(item).show();
           } else {
             $(item).hide();
           }
         });
       }
-    });
+    };
+
+    $("#productSearch").on('input', searchMethod);
+    $("#productCategory").on('change', searchMethod);
   }
 
   if ($("#alcoholAgeCheck").length > 0 && $("#createYourOwn").length === 0) {
