@@ -51,7 +51,7 @@ $(window).on('load', function () {
             $(item).show();
           } else if (desc.indexOf(search) > -1 && categoryEmpty) {
             $(item).show();
-          } else if (categoryEmpty && cats.indexOf(category) > -1) {
+          } else if (searchEmpty && cats.indexOf(category) > -1) {
             $(item).show();
           } else {
             $(item).hide();
