@@ -5,8 +5,23 @@
         <h1 class="font-weight-bold">{{.Title}}</h1>
       </div>
 
-      <div class="col-12">        
+      <div class="col-12">
+        {{ $categories := slice }}
+        {{ range .Pages }}
+          {{ if .Params.categories }}
+            {{ $categories  = $categories | append .Params.categories }}
+          {{ end }}
+        {{ end }}
+  
         <input type="text" id="productSearch">
+
+        <select>
+          <option>Categories</option>
+          {{ range $categories | uniq }}
+            <option>{{ . }}</option>
+          {{ end }}
+        </select>
+
       </div>
 
       <div class="col-12 text-center mb-4">
