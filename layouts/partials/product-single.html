@@ -30,7 +30,7 @@
             data-item-name="{{.Title}}"
             data-item-image="{{range first 1 .Params.Images}}{{. | absURL}}{{end}}"
             data-item-price="{{if .Params.discount_price}}{{.Params.discount_price}}{{else}}{{.Params.price}}{{end}}" data-item-url="{{.Permalink}}"
-            data-item-custom1-name="Notes"
+            data-item-custom1-name="Gift note message"
             data-item-custom1-type="textarea"
             data-item-stackable="never"
             {{if .Params.requireAlcoholWarning}}
