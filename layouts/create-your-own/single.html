@@ -46,15 +46,43 @@
             </button>
           </div>
         </div>
+      </div>      
+
+      <div class="col-12">
+        {{ $categories := slice }}
+        {{ range .Params.products }}
+          {{ if .categories }}
+            {{ $categories  = $categories | append .categories }}
+          {{ end }}
+        {{ end }}
+          
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <input type="text" class="form-control" placeholder="Search" id="productSearch">
+          </div>
+          <div class="form-group col-md-3">
+            <select id="productCategory" class="custom-select">
+              <option value="">Categories</option>
+              {{ range $categories | sort | uniq }}
+                <option value="{{ . }}">{{ . }}</option>
+              {{ end }}
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+          </div>
+        </div>
       </div>
 
       {{ range .Params.products }}
-      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
+      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 product-list">
         <div class="block">
           <div class="gallery-overlay pointer product">
             <div class="gallery-popup">
               <i class="tf-ion-android-add-circle"></i>
             </div>
+            
+            <input type="hidden" class="description" value="{{ .name }} {{ .description }}">          
+            <input type="hidden" class="categories" value='{{ if .categories }}{{ delimit .categories "," }}{{ end }}'>
 
             <div data-option-name="{{.option_name}}" data-option-alcohol="{{.alcohol_warning}}" data-option-price="{{.price}}"
               class="mini pointer d-none col-xl-2 col-lg-3 col-md-4 col-sm-4 mini-product mb-2">

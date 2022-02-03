@@ -32,36 +32,36 @@ $(window).on('load', function () {
 
 (function ($) {
   'use strict';
+  
+  var searchMethod = function(itemSelector) {
+    var search = $("#productSearch").val().toLowerCase();
+    var searchEmpty = search.replace(/\s/, "") === "";
+    var category = $("#productCategory option:selected").val().toLowerCase();
+    var categoryEmpty = category === "";
+
+    if (searchEmpty && categoryEmpty) {
+      $(itemSelector).show();
+    } else {
+      $(itemSelector).each((i, item) => {
+        var desc = $(item).find("input.description").val().toLowerCase();
+        var cats = $(item).find("input.categories").val().toLowerCase();
+
+        if (desc.indexOf(search) > -1 && cats.indexOf(category) > -1) {
+          $(item).show();
+        } else if (desc.indexOf(search) > -1 && categoryEmpty) {
+          $(item).show();
+        } else if (searchEmpty && cats.indexOf(category) > -1) {
+          $(item).show();
+        } else {
+          $(item).hide();
+        }
+      });
+    }
+  };
 
   if ($("#productSearch").length > 0) {
-    var searchMethod = function(e) {
-      var search = $("#productSearch").val().toLowerCase();
-      var searchEmpty = search.replace(/\s/, "") === "";
-      var category = $("#productCategory option:selected").val().toLowerCase();
-      var categoryEmpty = category === "";
-
-      if (searchEmpty && categoryEmpty) {
-        $(".product-list").show();
-      } else {
-        $(".product-list").each((i, item) => {
-          var desc = $(item).find("input.description").val().toLowerCase();
-          var cats = $(item).find("input.categories").val().toLowerCase();
-
-          if (desc.indexOf(search) > -1 && cats.indexOf(category) > -1) {
-            $(item).show();
-          } else if (desc.indexOf(search) > -1 && categoryEmpty) {
-            $(item).show();
-          } else if (searchEmpty && cats.indexOf(category) > -1) {
-            $(item).show();
-          } else {
-            $(item).hide();
-          }
-        });
-      }
-    };
-
-    $("#productSearch").on('input', searchMethod);
-    $("#productCategory").on('change', searchMethod);
+    $("#productSearch").on('input', () => searchMethod(".product-list"));
+    $("#productCategory").on('change', () => searchMethod(".product-list"));
   }
 
   if ($("#alcoholAgeCheck").length > 0 && $("#createYourOwn").length === 0) {
