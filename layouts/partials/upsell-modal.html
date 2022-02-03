@@ -55,7 +55,21 @@
             data-item-custom4-value="false"
           {{end}}
           data-item-stackable="never"
-          data-item-weight="1000"
+          data-item-weight="1000" 
+
+          {{ if eq .Params.useproducts_for_options true }}
+            {{ $options := slice }}
+            {{ range .Params.Products }}
+              {{ $options = $options | append (printf "%s[+%.2f]" .option_name (div (float .price) 100)) }}
+            {{ end }}
+
+            {{ range $i, $sequence :=  (seq 15) }}
+              {{ $index := add $i 5  }}
+              data-item-custom{{$index}}-name="Product {{ $sequence }}"
+              data-item-custom{{$index}}-options='{{ delimit ($options | sort) "|" }}'
+            {{ end }}
+          {{ end }}
+
           {{ if .Params.options }}
             {{ range $index, $element := .Params.options }}
               {{ $customIndex := add $index 5 }}
