@@ -60,7 +60,11 @@
           {{ if eq .Params.useproducts_for_options true }}
             {{ $options := slice }}
             {{ range .Params.Products }}
-              {{ $options = $options | append (printf "%s[+%.2f]" .option_name (div (float .price) 100)) }}
+              {{ if eq .price "0.00" }}
+                {{ $options = $options | append .option_name }}
+              {{ else }}
+                {{ $options = $options | append (printf "%s[+%.2f]" .option_name (div (float .price) 100)) }}
+              {{ end }}
             {{ end }}
 
             {{ range $i, $sequence :=  (seq 15) }}
