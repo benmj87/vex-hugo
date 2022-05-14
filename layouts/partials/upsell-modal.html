@@ -44,7 +44,7 @@
           data-item-custom1-type="textarea"
           data-item-custom2-name="Greeting card"
           data-item-custom2-value="None"
-          data-item-custom2-options="None{{ range site.Params.cards }}|{{ .title }}[+{{ .price }}]{{ end }}"
+          data-item-custom2-options='None{{ range site.Params.cards }}|{{ .title }}{{ if ne .price "0.00" }}[+{{ .price }}]{{ end }}{{ end }}'
           data-item-custom3-name="Greeting card message"
           data-item-custom3-type="textarea"
           data-item-custom4-type="hidden"
@@ -60,11 +60,7 @@
           {{ if eq .Params.useproducts_for_options true }}
             {{ $options := slice }}
             {{ range .Params.Products }}
-              {{ if eq .price "0.00" }}
-                {{ $options = $options | append .option_name }}
-              {{ else }}
-                {{ $options = $options | append (printf "%s[+%.2f]" .option_name (div (float .price) 100)) }}
-              {{ end }}
+              {{ $options = $options | append (printf "%s[+%.2f]" .option_name (div (float .price) 100)) }}
             {{ end }}
 
             {{ range $i, $sequence :=  (seq 15) }}
