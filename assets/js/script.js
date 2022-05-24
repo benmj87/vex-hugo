@@ -153,8 +153,8 @@ $(window).on('load', function () {
     // first four customs are Note, Card choice, Card Text, alcohol.
     var i = 5;
     while (snipcartButton.hasAttribute("data-item-custom" + i + "-name")) {
-      if (i <= 6) {
-        // start at 5, first two don't have a "None" option (minimum of two per order) so just remove the attribute
+      if (i === 5) {
+        // start at 5, first one doesn't have a "None" option (minimum of one per order) so just remove the attribute
         snipcartButton.removeAttribute("data-item-custom" + i + "-value");
       } else {
         snipcartButton.setAttribute("data-item-custom" + i + "-value", "None");
@@ -275,11 +275,11 @@ $(window).on('load', function () {
     });
 
     document.getElementById("openModal").onclick = function() {
-      // only allow adding with a minimum of 2 products
-      if ($("#selectedProductsRow .mini").length >= 2) {
+      // only allow adding with a minimum of 1 products
+      if ($("#selectedProductsRow .mini").length >= 1) {
         $("#modalSelector").modal({});
       } else {
-        alert('Minimum of 2 products');
+        alert('Minimum of 1 products');
       }
 
       resetSelection();
