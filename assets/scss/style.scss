@@ -9,6 +9,11 @@ $primary-color: #c7aa8c;
 $secondary-color: #c7aa8c;
 $icon-font: 'themefisher-font' !important;
 
+a.dropdown-item:active {
+  background-color: $primary-color;
+  color: #fff;
+}
+
 /*--
     Common Css
 --*/
