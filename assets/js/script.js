@@ -58,10 +58,42 @@ $(window).on('load', function () {
       });
     }
   };
+  
+  var sortProducts = function() {
+    var sortOrder = $("#productOrderBy option:selected").val().toLowerCase();
+    console.log(sortOrder);
+    let allChildren = [];
+    let container = document.getElementById("createYourOwnProducts");
+    for (let i = 0; i < container.children.length; i++) {
+      let child = container.children[i];
+      allChildren.push(child);
+    }
+
+    let sortedChildren = allChildren.sort((a, b) => {
+      let priceA = a.getElementsByClassName("price")[0].innerText.trim();
+      let priceB = b.getElementsByClassName("price")[0].innerText.trim();
+
+      let priceValA = parseInt(priceA.replace(/[.£]/g, ""));
+      let priceValB = parseInt(priceB.replace(/[.£]/g, ""));
+
+      if (sortOrder === "priceasc") {
+        return priceValA > priceValB ? 1 : -1;
+      } else if (sortOrder === "pricedesc") {
+        return priceValA <= priceValB ? 1 : -1;
+      }
+    });
+
+    document.getElementById("createYourOwnProducts").innerHTML = '';
+    for (let i = 0; i < sortedChildren.length; i++) {
+      let item = sortedChildren[i];
+      container.appendChild(item);
+    }
+  }
 
   if ($("#productSearch").length > 0) {
     $("#productSearch").on('input', () => searchMethod(".product-list"));
     $("#productCategory").on('change', () => searchMethod(".product-list"));
+    $("#productOrderBy").on('change', () => sortProducts());
   }
 
   if ($("#alcoholAgeCheck").length > 0 && $("#createYourOwn").length === 0) {
