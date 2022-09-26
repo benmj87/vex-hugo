@@ -63,7 +63,7 @@ $(window).on('load', function () {
     var sortOrder = $("#productOrderBy option:selected").val().toLowerCase();
     console.log(sortOrder);
     let allChildren = [];
-    let container = document.getElementById("createYourOwnProducts");
+    let container = document.getElementById("productContainer");
     for (let i = 0; i < container.children.length; i++) {
       let child = container.children[i];
       allChildren.push(child);
@@ -83,7 +83,7 @@ $(window).on('load', function () {
       }
     });
 
-    document.getElementById("createYourOwnProducts").innerHTML = '';
+    document.getElementById("productContainer").innerHTML = '';
     for (let i = 0; i < sortedChildren.length; i++) {
       let item = sortedChildren[i];
       container.appendChild(item);
