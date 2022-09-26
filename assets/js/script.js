@@ -61,7 +61,6 @@ $(window).on('load', function () {
   
   var sortProducts = function() {
     var sortOrder = $("#productOrderBy option:selected").val().toLowerCase();
-    console.log(sortOrder);
     let allChildren = [];
     let container = document.getElementById("productContainer");
     for (let i = 0; i < container.children.length; i++) {
