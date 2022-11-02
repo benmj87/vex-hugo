@@ -2,18 +2,26 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add a greeting card?</h5>
+        <h5 class="modal-title">{{ if eq .Params.cardFree true }}Choose your greeting card{{ else }}Add a greeting card?{{ end }}</h5>
         <button id="btnSkip" class="btn btn-main btn-main-sm">Skip</button>
       </div>
       <div class="modal-body card-options">
         <div class="container">
           <div class="row">
+            {{ $cardfree := .Params.cardFree }}
             {{ range site.Params.cards }}
               <div class="col-xl-2 col-lg-3 col-md-5 col-sm-5 mb-4 pointer">
                 <div class="card">
                   <img loading="lazy" class="card-img-top" src="{{ .image | absURL }}" alt="{{ .title }}">
                   <div class="card-body px-0 py-3">
-                    <p class="card-text m-0"><input type="radio" name="card-choice" value="{{ .title }}"><span>{{ .title }}</span><br><span class="price">+£{{ .price }}</span></p>
+                    <p class="card-text m-0">
+                      <input type="radio" name="card-choice" value="{{ .title }}">
+                      <span>{{ .title }}</span>
+                      {{ if ne $cardfree true }}
+                        <br>
+                        <span class="price">+£{{ .price }}</span>
+                      {{ end }}
+                    </p>
                   </div>
                 </div>
                 <p class="card-text note mt-2">
@@ -45,7 +53,7 @@
           data-item-custom1-type="textarea"
           data-item-custom2-name="Greeting card"
           data-item-custom2-value="None"
-          data-item-custom2-options='None{{ range site.Params.cards }}|{{ .title }}{{ if ne .price "0.00" }}[+{{ .price }}]{{ end }}{{ end }}'
+          data-item-custom2-options='None{{ range site.Params.cards }}|{{ .title }}{{ if and (ne .price "0.00") (ne $cardfree true) }}[+{{ .price }}]{{ end }}{{ end }}'
           data-item-custom3-name="Greeting card message"
           data-item-custom3-type="textarea"
           data-item-custom4-type="hidden"
